@@ -17,8 +17,11 @@
 #define BUS_FREQ		16000000
 
 #define SYSPRI3			(*((volatile uint32_t *)0xE000E400))
+#define INCTRL			(*((volatile uint32_t *)0xE000ED04))
+	
 
 uint32_t MILLIS_PRESCALER;
+
 
 void osSchedulerLaunch(void);
 struct tcb{
@@ -30,7 +33,9 @@ typedef struct tcb tcbType;
 tcbType tcbs[NUM_OF_THREADS];
 tcbType *currentPt;
 
+
 int32_t TCB_STACK[NUM_OF_THREADS][STACK_SIZE];
+
 
 void osKernelStackInit(int i){
 	tcbs[i].stackPt = &TCB_STACK[i][STACK_SIZE-16];
@@ -88,4 +93,12 @@ void osKernelLaunch(uint32_t quanta){
 	osSchedulerLaunch();
 	
 }
+
+void osThreadYield(void){
+	// setPending SysTick correspond to bit 26
+	
+	INCTRL = 0x04000000;
+	
+}
+
 

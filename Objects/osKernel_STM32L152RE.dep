@@ -1,7 +1,7 @@
 Dependencies for Project 'osKernel', Target 'STM32L152RE': (DO NOT MODIFY !)
 CompilerVersion: 6140000::V6.14::ARMCLANG
-F (.\main.c)(0x5F57C00C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -Oz -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/_STM32L152RE-IC:/Users/33766/AppData/Local/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Users/33766/AppData/Local/Arm/Packs/Keil/STM32L1xx_DFP/1.2.0/Device/Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32L152xE -D_RTE_-o ./objects/main.o -MD)
-I (osKernel.h)(0x5F57C1A5)
+F (.\main.c)(0x5F589199)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -Oz -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/_STM32L152RE-IC:/Users/33766/AppData/Local/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Users/33766/AppData/Local/Arm/Packs/Keil/STM32L1xx_DFP/1.2.0/Device/Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32L152xE -D_RTE_-o ./objects/main.o -MD)
+I (osKernel.h)(0x5F588ECB)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x5DE051D2)
 I (C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.2.0\Device\Include\stm32l1xx.h)(0x57E11A70)
 I (C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.2.0\Device\Include\stm32l152xe.h)(0x57E11A70)
@@ -13,9 +13,9 @@ I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x5E0D174C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x5E0D1778)
 I (C:\Users\33766\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8F2582)
 I (C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.2.0\Device\Include\system_stm32l1xx.h)(0x57E11A70)
-F (.\osKernel.h)(0x5F57C1A5)()
+F (.\osKernel.h)(0x5F588ECB)()
 F (.\osKernel.s)(0x5F57C168)(--target=arm-arm-none-eabi -mcpu=cortex-m3 -masm=auto -c-gdwarf-3 -Wa,armasm,--pd,"__EVAL SETA 1"-I./RTE/_STM32L152RE-IC:/Users/33766/AppData/Local/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Users/33766/AppData/Local/Arm/Packs/Keil/STM32L1xx_DFP/1.2.0/Device/Include-Wa,armasm,--pd,"__UVISION_VERSION SETA 530" -Wa,armasm,--pd,"_RTE_ SETA 1" -Wa,armasm,--pd,"STM32L152xE SETA 1" -Wa,armasm,--pd,"_RTE_ SETA 1"-o ./objects/oskernel.o)
-I (osKernel.h)(0x5F57C1A5)
+I (osKernel.h)(0x5F588ECB)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x5DE051D2)
 I (C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.2.0\Device\Include\stm32l1xx.h)(0x57E11A70)
 I (C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.2.0\Device\Include\stm32l152xe.h)(0x57E11A70)
@@ -27,8 +27,8 @@ I (C:\Keil_v5\ARM\ARMCLANG\include\arm_compat.h)(0x5E0D174C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\arm_acle.h)(0x5E0D1778)
 I (C:\Users\33766\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8F2582)
 I (C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.2.0\Device\Include\system_stm32l1xx.h)(0x57E11A70)
-F (.\osKernel.c)(0x5F57C1A5)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -Oz -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/_STM32L152RE-IC:/Users/33766/AppData/Local/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Users/33766/AppData/Local/Arm/Packs/Keil/STM32L1xx_DFP/1.2.0/Device/Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32L152xE -D_RTE_-o ./objects/oskernel_1.o -MD)
-I (osKernel.h)(0x5F57C1A5)
+F (.\osKernel.c)(0x5F5891DA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-3 -Oz -ffunction-sections -Weverything -Wno-packed -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/_STM32L152RE-IC:/Users/33766/AppData/Local/Arm/Packs/ARM/CMSIS/5.7.0/CMSIS/Core/Include-IC:/Users/33766/AppData/Local/Arm/Packs/Keil/STM32L1xx_DFP/1.2.0/Device/Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32L152xE -D_RTE_-o ./objects/oskernel_1.o -MD)
+I (osKernel.h)(0x5F588ECB)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x5DE051D2)
 I (C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.2.0\Device\Include\stm32l1xx.h)(0x57E11A70)
 I (C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.2.0\Device\Include\stm32l152xe.h)(0x57E11A70)

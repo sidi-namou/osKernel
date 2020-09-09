@@ -18,5 +18,7 @@ uint8_t osKernelAddThreads(void(*task0)(void),
 		void(*task1)(void),
 		void(*task2)(void));
 
-
+void osThreadYield(void);
+		
+		
 #endif /* RT_KERNEL_OSKERNEL_H_ */

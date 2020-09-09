@@ -49,8 +49,9 @@ int getButtonValue(void);
 void Task0(void){
 	
 		while(1){
-	count0++;
+			count0++;
 			ledOff();
+			osThreadYield();
 					}	
 		
 }
@@ -59,7 +60,9 @@ void Task1(void){
 			while(1){
 				
 			count1++;
-			ledOn();				
+				
+			ledOn();
+			osThreadYield();				
 				}
 			
 			
@@ -103,7 +106,7 @@ void GPIO_Init(){
 	// GPIOA and GPIOC clocks enable
 		RCC->AHBENR |= GPIOA_CLOCK|GPIOC_CLOCK;
 
-		// GPIOC13 input mode
+		
 		// GPIOA5 and GPIOA0 as output mode
 		GPIOA->MODER |= GREEN_BIT|ORANGE_BIT;
 		
