@@ -19,6 +19,8 @@ enum {
 #define ORANGE (1U)
 #define ORANGE_BIT (1U)
 
+Semaphore_t sem12; 	// semaphore between task1 and task2
+Semaphore_t	sem21;
 /* Private macro */
 
 /* Private variables */
@@ -49,20 +51,23 @@ int getButtonValue(void);
 void Task0(void){
 	
 		while(1){
+			osSemaphoreGive(&sem12);
 			count0++;
 			ledOff();
-			osThreadYield();
+			osSemaphoreTake(&sem21);
+			
 					}	
 		
 }
 void Task1(void){
 
 			while(1){
-				
+			// wait for task1 to give semaphore	
+			osSemaphoreTake(&sem12);
 			count1++;
 				
-			ledOn();
-			osThreadYield();				
+			ledOn();	
+			osSemaphoreGive(&sem21);
 				}
 			
 			
@@ -81,6 +86,8 @@ void Task2(void){
 int main(){
 
 	GPIO_Init();
+	osSemaphoreBinaryCreate(&sem12);	// Create a semaphore
+	osSemaphoreBinaryCreate(&sem21);	// Create a semaphore
 	osKernelInit();
 	osKernelAddThreads(&Task0,&Task1,&Task2);
 	osKernelLaunch(QUANTA);

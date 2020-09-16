@@ -22,13 +22,16 @@ Dialog DLL:      TCM.DLL V1.42.0.0
  
 <h2>Project:</h2>
 C:\Users\33766\Desktop\Itekube_Projects\osKernel\osKernel.uvprojx
-Project File Date:  09/08/2020
+Project File Date:  09/16/2020
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.14', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'STM32L152RE'
 Note: source file '.\osKernel.c' - object file renamed from '.\Objects\osKernel.o' to '.\Objects\oskernel_1.o'.
 assembling osKernel.s...
+osKernel.c(131): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
 osKernel.c(23): warning: no previous extern declaration for non-static variable 'MILLIS_PRESCALER' [-Wmissing-variable-declarations]
 uint32_t MILLIS_PRESCALER;
          ^
@@ -53,11 +56,106 @@ int32_t TCB_STACK[NUM_OF_THREADS][STACK_SIZE];
 osKernel.c(37): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 int32_t TCB_STACK[NUM_OF_THREADS][STACK_SIZE];
 ^
-4 warnings generated.
+5 warnings generated.
 compiling osKernel.c...
-linking...
-Program Size: Code=800 RO-data=308 RW-data=0 ZI-data=2880  
-".\Objects\osKernel.axf" - 0 Error(s), 4 Warning(s).
+main.c(31): warning: this function declaration is not a prototype [-Wstrict-prototypes]
+void GPIO_Init();
+              ^
+               void
+main.c(51): warning: no previous prototype for function 'Task0' [-Wmissing-prototypes]
+void Task0(void){
+     ^
+main.c(51): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void Task0(void){
+^
+static 
+main.c(51): warning: function 'Task0' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+void Task0(void){
+                ^
+main.c(62): warning: no previous prototype for function 'Task1' [-Wmissing-prototypes]
+void Task1(void){
+     ^
+main.c(62): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void Task1(void){
+^
+static 
+main.c(62): warning: function 'Task1' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+void Task1(void){
+                ^
+main.c(75): warning: no previous prototype for function 'Task2' [-Wmissing-prototypes]
+void Task2(void){
+     ^
+main.c(75): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void Task2(void){
+^
+static 
+main.c(75): warning: function 'Task2' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
+void Task2(void){
+                ^
+main.c(110): warning: implicit conversion changes signedness: 'int' to 'unsigned int' [-Wsign-conversion]
+                RCC->CR &= ~(0x00000100);
+                        ~~ ^~~~~~~~~~~~~
+main.c(106): warning: while loop has empty body [-Wempty-body]
+                while((RCC->CR & 0x02) == 0x02);
+                                               ^
+main.c(106): note: put the semicolon on a separate line to silence this warning
+main.c(101): warning: no previous prototype for function 'GPIO_Init' [-Wmissing-prototypes]
+void GPIO_Init(){
+     ^
+main.c(31): note: this declaration is not a prototype; add 'void' to make it a prototype for a zero-parameter function
+void GPIO_Init();
+     ^
+               void
+main.c(133): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+main.c(4): warning: no previous extern declaration for non-static variable 'count0' [-Wmissing-variable-declarations]
+uint32_t count0,count1,count2;
+         ^
+main.c(4): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint32_t count0,count1,count2;
+^
+main.c(4): warning: no previous extern declaration for non-static variable 'count1' [-Wmissing-variable-declarations]
+uint32_t count0,count1,count2;
+                ^
+main.c(4): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint32_t count0,count1,count2;
+^
+main.c(4): warning: no previous extern declaration for non-static variable 'count2' [-Wmissing-variable-declarations]
+uint32_t count0,count1,count2;
+                       ^
+main.c(4): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint32_t count0,count1,count2;
+^
+main.c(22): warning: no previous extern declaration for non-static variable 'sem12' [-Wmissing-variable-declarations]
+Semaphore_t sem12;      // semaphore between task1 and task2
+            ^
+main.c(22): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+Semaphore_t sem12;      // semaphore between task1 and task2
+^
+main.c(23): warning: no previous extern declaration for non-static variable 'sem21' [-Wmissing-variable-declarations]
+Semaphore_t     sem21;
+                ^
+main.c(23): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+Semaphore_t     sem21;
+^
+16 warnings generated.
+compiling main.c...
+RTE/Device/STM32L152RE/system_stm32l1xx.c(173): error: redefinition of 'PLLMulTable' with a different type: 'const volatile uint8_t [9]' vs 'const uint8_t [9]'
+__IO const uint8_t PLLMulTable[9] = {3, 4, 6, 8, 12, 16, 24, 32, 48};
+                   ^
+C:/Users/33766/AppData/Local/Arm/Packs/Keil/STM32L1xx_DFP/1.3.0/Drivers/CMSIS/Device/ST/STM32L1xx/Include/system_stm32l1xx.h(63): note: previous declaration is here
+extern const uint8_t PLLMulTable[9];      /*!< PLL multipiers table values */
+                     ^
+RTE/Device/STM32L152RE/system_stm32l1xx.c(174): error: redefinition of 'AHBPrescTable' with a different type: 'const volatile uint8_t [16]' vs 'const uint8_t [16]'
+__IO const uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+                   ^
+C:/Users/33766/AppData/Local/Arm/Packs/Keil/STM32L1xx_DFP/1.3.0/Drivers/CMSIS/Device/ST/STM32L1xx/Include/system_stm32l1xx.h(61): note: previous declaration is here
+extern const uint8_t AHBPrescTable[16];   /*!< AHB prescalers table values */
+                     ^
+2 errors generated.
+compiling system_stm32l1xx.c...
+".\Objects\osKernel.axf" - 2 Error(s), 21 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -68,24 +166,28 @@ Package Vendor: ARM
    * Component: CORE Version: 5.4.0
 
 Package Vendor: Keil
-                http://www.keil.com/pack/Keil.STM32L1xx_DFP.1.2.0.pack
-                Keil.STM32L1xx_DFP.1.2.0
+                http://www.keil.com/pack/Keil.STM32L1xx_DFP.1.3.0.pack
+                Keil.STM32L1xx_DFP.1.3.0
                 STMicroelectronics STM32L1 Series Device Support and Examples
-   * Component: Startup Version: 2.0.0
+   * Component: Startup Version: 1.0.0
 
 <h2>Collection of Component include folders:</h2>
   .\RTE\_STM32L152RE
   C:\Users\33766\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include
-  C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.2.0\Device\Include
+  C:\Users\33766\AppData\Local\Arm\Packs\Keil\STM32L1xx_DFP\1.3.0\Drivers\CMSIS\Device\ST\STM32L1xx\Include
 
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.4.0
 
-   * Component: Keil::Device:Startup:2.0.0
-      Source file:   Device\Source\ARM\startup_stm32l152xe.s
-      Source file:   Device\Source\system_stm32l1xx.c
-      Source file:   Device\Source\ARM\STM32L1xx_XL_OPT.s
+   * Component: Keil.Standalone::Device:Startup:1.0.0
+      Source file:   MDK\Device\Source\ARM\STM32L1xx_MD_OPT.s
+      Source file:   MDK\Device\Source\ARM\STM32L1xx_HD_OPT.s
+      Include file:  Drivers\CMSIS\Device\ST\STM32L1xx\Include\stm32l1xx.h
+      Source file:   MDK\Device\Source\ARM\STM32L1xx_MD+_OPT.s
+      Source file:   MDK\Device\Source\ARM\STM32L1xx_XL_OPT.s
+      Source file:   Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\system_stm32l1xx.c
+Target not created.
 Build Time Elapsed:  00:00:01
 </pre>
 </body>
