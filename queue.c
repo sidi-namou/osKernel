@@ -1,6 +1,6 @@
 #include "queue.h"
 
-static Semaphore_t semWrite, semRead;
+static Semaphore_t  mutexQueue;
 
 bool IsFull(Queue_t * q,uint32_t size);
 bool IsEmpty(Queue_t * q);
@@ -73,10 +73,9 @@ queue_state osQueueCreate(Queue_t ** q,uint32_t length){
 	initQueue(*q);
 	
 	(*q)->lengthMax = length;
-	osSemaphoreBinaryCreate(&semWrite);	// Create a semaphore
-	osSemaphoreBinaryCreate(&semRead);	// Create a semaphore
-	osSemaphoreGive(&semWrite);
-	osSemaphoreGive(&semRead);
+
+	osMutexCreate(&mutexQueue);
+
 
 return Memory_Allocation_Succed;
 }
@@ -93,11 +92,14 @@ uint32_t timeTicks = 0;
 	}
 
 	if(!IsFull(q,q->lengthMax)){
-	osSemaphoreTake(&semWrite);
-	
+
+		/*Take mutex to protect memory*/
+	osMutexTake(&mutexQueue);
+		
 	enQueue(q,*data,q->lengthMax);
-	
-	osSemaphoreGive(&semRead);
+		/* Give it back once we've done*/
+	osMutexGive(&mutexQueue);
+
 	}
 	
 }
@@ -113,9 +115,13 @@ void osQueueReceive(Queue_t *q, void ** data, uint32_t timeToWait){
 	}
 
 	if(!IsEmpty(q)){
-	osSemaphoreTake(&semRead);
+
+			/*Take mutex to protect memory*/
+	osMutexTake(&mutexQueue);
 	*data = deQueue(q);
-	osSemaphoreGive(&semWrite);
+		/* Give it back once we've done*/
+	osMutexGive(&mutexQueue);
+	
 	}
 	
 	

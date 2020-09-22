@@ -1,5 +1,6 @@
 #include "timer.h"
 
+Semaphore_t semISR;
 static volatile uint32_t count;
 // We're using TIM2 to control sendQueue
 // To do that we need to enable horloge to TIM2
@@ -21,6 +22,7 @@ void timer_Init(){
 void TIM2_IRQHandler(void){
 	TIM2->SR = 0;
 	count++;
+	osSemaphoreGiveFromISR(&semISR);
 	}
 
 uint32_t getTick(){

@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include "stm32l1xx.h"
+#include "osKernel.h"
+
 
 
 void setTick(uint32_t tick);

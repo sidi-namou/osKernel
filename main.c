@@ -4,8 +4,8 @@
 
 #define QUANTA	100 // 100ms
 
-
-uint32_t count0,count1,count2, state=0;
+extern Semaphore_t semISR;
+static volatile uint32_t count0,count1,count2, state=0;
 //static char  data[30];
 /* Private typedef */
 enum {
@@ -64,10 +64,10 @@ void Task0(void){
 			
 			count0++;
 			dat = (void *) (&count0);
-			ledOff();
+			
 		//	osSemaphoreGive(&sem12);
 			osQueueSend(queue12,&dat,2);
-			
+			ledOff();
 		//	osSemaphoreTake(&sem21);
 			//osSemaphoreTake(&sem21);
 			
@@ -97,6 +97,7 @@ void Task2(void){
 	
 	while(1){
 		
+		osSemaphoreTake(&semISR);
 		count2++;
 		orangeOn();
 		
@@ -114,6 +115,8 @@ int main(){
 	if(osQueueCreate(&queue12,3)==Memory_Allocation_Succed)state = 1; /*for debugging*/
 	osSemaphoreBinaryCreate(&sem12);	// Create a semaphore
 	osSemaphoreBinaryCreate(&sem21);	// Create a semaphore
+	
+	osSemaphoreBinaryCreate(&semISR);	// Create a semaphore
 	osKernelInit();
 	osKernelAddThreads(&Task0,&Task1,&Task2);
 	osKernelLaunch(QUANTA);

@@ -18,7 +18,8 @@
 
 #define SYSPRI3			(*((volatile uint32_t *)0xE000E400))
 #define INCTRL			(*((volatile uint32_t *)0xE000ED04))
-	
+
+
 
 uint32_t MILLIS_PRESCALER;
 
@@ -128,4 +129,37 @@ void osSemaphoreTake(Semaphore_t * sem){
 	__disable_irq();
 	*sem = 0;	// semaphore reset to 0
 	__enable_irq();
+}
+
+void osMutexCreate(Semaphore_t *mutex){
+
+	/* Create a mutex and initialise to 1 to be taken by anyone at first*/
+	*mutex = 1;
+}
+void osMutexTake(Semaphore_t *mutex){
+
+		while(*mutex != 1){
+	osThreadYield();	// task sleep	
+	}
+		/* Once we have the mutex we need to disable all interrupts */
+	
+		__disable_irq();
+	/* set mutex to 0*/
+	*mutex = 0;
+}
+void osMutexGive(Semaphore_t *mutex){
+	/* set mutex to 1*/
+	*mutex = 1;
+	/* Enable Interrupts*/
+	__enable_irq();
+
+}
+void osSemaphoreGiveFromISR(Semaphore_t *sem){
+
+	*sem = 1;
+
+}
+inline void osSemaphoreTakeFromISR(Semaphore_t *sem){
+
+	if(*sem != 1) return;
 }

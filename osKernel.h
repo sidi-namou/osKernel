@@ -31,6 +31,11 @@ void osThreadYield(void);
 void osSemaphoreBinaryCreate(Semaphore_t * sem);
 void osSemaphoreTake(Semaphore_t * sem);
 void osSemaphoreGive(Semaphore_t * sem);
-		
-		
+
+void osMutexCreate(Semaphore_t *mutex);
+void osMutexTake(Semaphore_t *mutex);
+void osMutexGive(Semaphore_t *mutex);		
+
+void osSemaphoreGiveFromISR(Semaphore_t *sem);
+inline void osSemaphoreTakeFromISR(Semaphore_t *sem);		
 #endif /* RT_KERNEL_OSKERNEL_H_ */
