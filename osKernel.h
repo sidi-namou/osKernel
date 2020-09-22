@@ -10,8 +10,13 @@
 #include <stdint.h>
 #include "stm32l1xx.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 typedef uint32_t Semaphore_t;
+
+
+
 
 void osKernelStackInit(int i);
 void osKernelLaunch(uint32_t quanta);
@@ -26,5 +31,6 @@ void osThreadYield(void);
 void osSemaphoreBinaryCreate(Semaphore_t * sem);
 void osSemaphoreTake(Semaphore_t * sem);
 void osSemaphoreGive(Semaphore_t * sem);
+		
 		
 #endif /* RT_KERNEL_OSKERNEL_H_ */

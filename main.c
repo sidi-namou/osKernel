@@ -1,8 +1,12 @@
 #include "osKernel.h"
+#include "queue.h"
+
 
 #define QUANTA	100 // 100ms
-uint32_t count0,count1,count2;
 
+
+uint32_t count0,count1,count2, state=0;
+//static char  data[30];
 /* Private typedef */
 enum {
 	PIN_RESET = 0,
@@ -19,8 +23,11 @@ enum {
 #define ORANGE (1U)
 #define ORANGE_BIT (1U)
 
-Semaphore_t sem12; 	// semaphore between task1 and task2
-Semaphore_t	sem21;
+static Semaphore_t sem12; 	// semaphore between task1 and task2
+static Semaphore_t	sem21;
+
+/* Queue Message between task 1 and task 2	*/
+static Queue_t * queue12;
 /* Private macro */
 
 /* Private variables */
@@ -28,7 +35,7 @@ Semaphore_t	sem21;
 
 /* Private function prototypes */
 void DelayS(uint32_t seconds);
-void GPIO_Init();
+void GPIO_Init(void);
 uint32_t GetTick(void);
 void ledOn(void);
 void ledOff(void);
@@ -36,7 +43,9 @@ void orangeOn(void);
 void orangeOff(void);
 int getButtonValue(void);
 
-
+void Task0(void);
+void Task1(void);
+void Task2(void);
 /* Private functions */
 
 
@@ -49,25 +58,37 @@ int getButtonValue(void);
 */
 
 void Task0(void){
+	void * dat;
 	
 		while(1){
-			osSemaphoreGive(&sem12);
+			
 			count0++;
+			dat = (void *) (&count0);
 			ledOff();
-			osSemaphoreTake(&sem21);
+		//	osSemaphoreGive(&sem12);
+			osQueueSend(queue12,&dat,2);
+			
+		//	osSemaphoreTake(&sem21);
+			//osSemaphoreTake(&sem21);
 			
 					}	
 		
 }
-void Task1(void){
-
+void Task1(void)
+	{
+	void * dat = 0;
+	static uint32_t *val;
+	 
 			while(1){
 			// wait for task1 to give semaphore	
-			osSemaphoreTake(&sem12);
-			count1++;
+		//	osSemaphoreTake(&sem12);
 				
-			ledOn();	
-			osSemaphoreGive(&sem21);
+				ledOn();
+				osQueueReceive(queue12,&dat,2);
+				val = (uint32_t *)dat;
+				count1 = *val;
+				
+			//osSemaphoreGive(&sem21);
 				}
 			
 			
@@ -86,6 +107,11 @@ void Task2(void){
 int main(){
 
 	GPIO_Init();
+	/*Initialisation of timer*/
+	timer_Init();
+	/*Create a Queue of Messages	*/
+	//queue12 = (Queue_t *)malloc(sizeof(Queue_t));
+	if(osQueueCreate(&queue12,3)==Memory_Allocation_Succed)state = 1; /*for debugging*/
 	osSemaphoreBinaryCreate(&sem12);	// Create a semaphore
 	osSemaphoreBinaryCreate(&sem21);	// Create a semaphore
 	osKernelInit();
@@ -103,11 +129,12 @@ void GPIO_Init(){
 	// HSI ON
 		RCC->CR |= 0x01;
 		// wait for HSI to be ready
-		while((RCC->CR & 0x02) == 0x02);
+		while((RCC->CR & 0x02) == 0x02){
+		}
 		// select HSI as system clock
 				RCC->CFGR |= 0x01;
 	// MSI OFF
-		RCC->CR &= ~(0x00000100);
+		RCC->CR &= (uint32_t)~(0x00000100);
 
 
 	// GPIOA and GPIOC clocks enable
@@ -119,10 +146,10 @@ void GPIO_Init(){
 		
 
 }
-void ledOn(void){
+inline void ledOn(void){
 	GPIOA->ODR |= GREEN;
 }
-void ledOff(void){
+inline void ledOff(void){
 	GPIOA->ODR &=~GREEN;
 }
 void orangeOn(void){
