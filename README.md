@@ -1,5 +1,6 @@
 # osKernel
 a simple os kernel
+
 osKernel project is a small real time operating system that contains a scheduler using round robin mechanism.
 This os can run three tasks in parallele.
 In osKernel.h you will find all functions that support this small RTOS.
